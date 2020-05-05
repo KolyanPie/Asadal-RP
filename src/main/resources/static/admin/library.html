@@ -15,7 +15,7 @@
     <input type="radio" name="domain" value="place"> Место
     <input type="radio" name="domain" value="character"> Характер
 </label>
-<form method="post" id="form">
+<form enctype="multipart/form-data" method="post" id="form">
     <div class="domain-input action character moodlet person place item">
         <p>Название:</p>
         <label><input type="text" name="name" placeholder="Название"></label>
@@ -23,37 +23,42 @@
     <div class="domain-input character moodlet person place item">
         <p> Описание:</p>
         <label><textarea name="description"></textarea></label>
+        <br>
     </div>
     <div class="domain-input item person place">
         <label for="picture"> Изображение:<br>
             <input type="file" name="picture" id="picture">
             <input type="submit" value="Загрузить">
-        </label><br>
+        </label>
+        <br>
     </div>
-    <div class="domain-input character moodlet person place">
+    <div class="domain-input action character item person place">
         <p> Подсказка:</p>
-        <label><textarea name="admin_hint"></textarea></label>
+        <label><textarea name="admin-hint"></textarea></label>
+        <br>
     </div>
     <div class="domain-input character">
         <p> Тип:</p>
         <label>
-            <input type="radio" value="POSITIVE" name="character_type" checked> Положительная черта
-            <input type="radio" value="NEGATIVE" name="character_type"> Отрицательная черта
-            <input type="radio" value="PROFESSION" name="character_type"> Профессия
-            <input type="radio" value="RACE" name="character_type"> Раса
+            <input type="radio" value="POSITIVE" name="character-type" checked> Положительная черта
+            <input type="radio" value="NEGATIVE" name="character-type"> Отрицательная черта
+            <input type="radio" value="PROFESSION" name="character-type"> Профессия
+            <input type="radio" value="RACE" name="character-type"> Раса
         </label><br>
     </div>
     <div class="domain-input moodlet">
         <p>Длительность:</p>
-        <label> <input type="number" name="login" placeholder="Длительность"></label>
+        <label> <input type="number" name="durability" placeholder="Длительность"></label>
         <br>
         <p>Сосредоточенность:</p>
-        <label> <input type="number" name="login" placeholder="Сосредоточенность"></label>
+        <label> <input type="number" name="value" placeholder="Сосредоточенность"></label>
+        <br>
     </div>
     <div class="domain-input person">
         <br>
         <em> Игровой </em>
-        <label> <input type="checkbox" name="login"></label>
+        <label> <input type="checkbox" name="playable"></label>
+        <br>
     </div>
     <input type="button" value="Save">
 </form>
