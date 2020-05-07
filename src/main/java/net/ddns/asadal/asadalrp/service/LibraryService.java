@@ -29,7 +29,7 @@ public class LibraryService {
         if (StringUtils.isEmpty(name) || actionRepo.findByName(name) != null) {
             return NAME_UNAVAILABLE;
         }
-        Action action = actionDto.createAction();
+        Action action = createAction(actionDto);
 
         actionRepo.save(action);
         return action.getName();
@@ -40,9 +40,27 @@ public class LibraryService {
         if (StringUtils.isEmpty(name) || moodletRepo.findByName(name) != null) {
             return NAME_UNAVAILABLE;
         }
-        Moodlet moodlet = moodletDto.createMoodlet();
+        Moodlet moodlet = createMoodlet(moodletDto);
 
         moodletRepo.save(moodlet);
         return moodlet.getName();
+    }
+
+    private Action createAction(ActionDto actionDto) {
+        Action action = new Action();
+
+        action.setName(actionDto.getName());
+        action.setAdminHint(actionDto.getAdminHint());
+        return action;
+    }
+
+    private Moodlet createMoodlet(MoodletDto moodletDto) {
+        Moodlet moodlet = new Moodlet();
+
+        moodlet.setName(moodletDto.getName());
+        moodlet.setDescription(moodletDto.getDescription());
+        moodlet.setDurability(moodletDto.getDurability());
+        moodlet.setValue(moodletDto.getValue());
+        return moodlet;
     }
 }

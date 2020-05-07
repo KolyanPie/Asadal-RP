@@ -1,7 +1,5 @@
 package net.ddns.asadal.asadalrp.domain.dto;
 
-import net.ddns.asadal.asadalrp.domain.Moodlet;
-
 public class MoodletDto {
     private String name;
     private String description;
@@ -38,15 +36,5 @@ public class MoodletDto {
 
     public void setValue(byte value) {
         this.value = value;
-    }
-
-    public Moodlet createMoodlet() {
-        Moodlet moodlet = new Moodlet();
-
-        moodlet.setName(name);
-        moodlet.setDescription(description);
-        moodlet.setDurability(durability);
-        moodlet.setValue(value);
-        return moodlet;
     }
 }
