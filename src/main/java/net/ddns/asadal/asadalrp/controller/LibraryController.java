@@ -1,5 +1,6 @@
 package net.ddns.asadal.asadalrp.controller;
 
+import net.ddns.asadal.asadalrp.domain.dto.ActionDto;
 import net.ddns.asadal.asadalrp.domain.dto.MoodletDto;
 import net.ddns.asadal.asadalrp.service.LibraryService;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,18 @@ public class LibraryController {
     @GetMapping("/library")
     public ModelAndView library() {
         return new ModelAndView("/static/admin/library.html");
+    }
+
+    @PostMapping("/save/action")
+    public ResponseEntity<String> saveAction(
+            ActionDto action
+    ) {
+        String answer = libraryService.saveDomain(action);
+        if (answer.equals(action.getName())) {
+            return ResponseEntity.ok(answer);
+        } else {
+            return new ResponseEntity<>(answer, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/save/moodlet")
