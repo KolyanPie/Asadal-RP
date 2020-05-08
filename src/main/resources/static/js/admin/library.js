@@ -23,4 +23,14 @@ function clearData() {
 
 $(document).ready(function () {
     selectDomain();
+    $('#save').click(function () {
+        sendForm(
+            $('#form')[0],
+            '/admin/save/' + domain,
+            clearData,
+            function (jqXHR) {
+                alert("Error code: " + jqXHR.status + "\n" + jqXHR.responseText);
+            }
+        );
+    });
 })
