@@ -1,4 +1,5 @@
 let domain;
+let isNew = true;
 
 function selectDomain() {
     $.each($('input[name="domain"]'), function (i, item) {
@@ -23,6 +24,14 @@ function clearData() {
 
 $(document).ready(function () {
     selectDomain();
+    $('#create-button').click(function () {
+        $('#save').val("Создать");
+        isNew = true;
+    });
+    $('#change-button').click(function () {
+        $('#save').val("Изменить");
+        isNew = false;
+    });
     $('#save').click(function () {
         sendForm(
             $('#form')[0],
