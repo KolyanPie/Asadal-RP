@@ -19,10 +19,14 @@ $(document).ready(function () {
     $('#create-button').click(function () {
         $('#save').val("Создать");
         isNew = true;
+        $('.change').css('display', 'none');
+        clearData();
     });
     $('#change-button').click(function () {
         $('#save').val("Изменить");
         isNew = false;
+        $('.change').css('display', 'unset');
+        clearData();
     });
     $('#save').click(function () {
         sendForm(
