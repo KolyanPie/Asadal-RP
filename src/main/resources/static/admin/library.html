@@ -68,18 +68,16 @@
         <td>
         <td rowspan="2">
             <div><input type="button" value="Удалить"></div>
-            <div class="dropdown-content scrollable action character moodlet person place item">
-                <label>
-                    <select size="30" style="width:200px">
-                        <option>kfljdkfj</option>
-                        <option>fhdhdf</option>
-                        <option>hfddf</option>
-                        <option>hfddhd</option>
-                        <option>Уют</option>
-                        <option>Тепло</option>
-                    </select>
-                </label>
-            </div>
+            <label class="scrollable change" style="display: none">
+                <select size="30" style="width:200px">
+                    <option>kfljdkfj</option>
+                    <option>fhdhdf</option>
+                    <option>hfddf</option>
+                    <option>hfddhd</option>
+                    <option>Уют</option>
+                    <option>Тепло</option>
+                </select>
+            </label>
         </td>
     <tr>
         <td>
@@ -91,7 +89,8 @@
                 <div class="domain-input character moodlet person place item">
                     <p> Описание:</p>
                     <label>
-                        <textarea name="description" class="scrollable" size="5" style="width:280px;height:90px"></textarea>
+                        <textarea name="description" class="scrollable" size="5" style="width:280px;height:90px">
+                        </textarea>
                     </label>
                     <br>
                 </div>
@@ -99,27 +98,27 @@
                 <div class="domain-input action character item person place">
                     <p> Подсказка:</p>
                     <label>
-                        <textarea name="admin-hint" class="scrollable" size="3" style="width:280px;height:50px"></textarea>
+                        <textarea name="admin-hint" class="scrollable" size="3" style="width:280px;height:50px">
+                        </textarea>
                     </label>
                     <br>
                 </div>
                 <div class="domain-input character">
                     <p> Тип:</p>
-                    <label>
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type="radio" value="POSITIVE" name="character-type" checked> Положительная
-                                    черта<br>
-                                    <input type="radio" value="NEGATIVE" name="character-type"> Отрицательная черта
-                                </td>
-                                <td>
-                                    <input type="radio" value="PROFESSION" name="character-type"> Профессия<br>
-                                    <input type="radio" value="RACE" name="character-type"> Раса
-                                </td>
-                            </tr>
-                        </table>
-                    </label><br>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="radio" value="POSITIVE" name="character-type" checked> Положительная
+                                черта<br>
+                                <input type="radio" value="NEGATIVE" name="character-type"> Отрицательная черта
+                            </td>
+                            <td>
+                                <input type="radio" value="PROFESSION" name="character-type"> Профессия<br>
+                                <input type="radio" value="RACE" name="character-type"> Раса
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
                 </div>
                 <div class="domain-input moodlet">
                     <p>Длительность:</p>
@@ -153,93 +152,117 @@
                 <br>
                 <div class="dropdown">
                     <button class="btn" style="width:140px;height:20px">Доб.мудлет</button>
-                    <div class="dropdown-content scrollable"><select size="5" style="width:280px">
-                        <option>Болит кулак</option>
-                        <option>Жажда</option>
-                        <option>Радость</option>
-                        <option>Парфюм</option>
-                        <option>Уют</option>
-                        <option>Тепло</option>
-                    </select></div>
+                    <label class="dropdown-content scrollable">
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
                 </div>
                 <button style="width:140px;height:20px">Убр.мудлет</button>
-                <p><select size="5" style="width:280px">
-                    <option>Болит кулак</option>
-                    <option>Жажда</option>
-                    <option>Радость</option>
-                    <option>Парфюм</option>
-                    <option>Уют</option>
-                    <option>Тепло</option>
-                </select></p>
+                <p>
+                    <label>
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
+                </p>
             </div>
             <div class="domain-input place">
                 <br>
                 <div class="dropdown">
                     <button class="btn" style="width:140px;height:20px">Доб.персонажа</button>
-                    <div class="dropdown-content scrollable"><select size="5" style="width:280px">
-                        <option>Болит кулак</option>
-                        <option>Жажда</option>
-                        <option>Радость</option>
-                        <option>Парфюм</option>
-                        <option>Уют</option>
-                        <option>Тепло</option>
-                    </select></div>
+                    <label class="dropdown-content scrollable">
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
                 </div>
                 <button style="width:140px;height:20px">Убр.персонажа</button>
-                <p><select size="5" style="width:280px">
-                    <option>Болит кулак</option>
-                    <option>Жажда</option>
-                    <option>Радость</option>
-                    <option>Парфюм</option>
-                    <option>Уют</option>
-                    <option>Тепло</option>
-                </select></p>
+                <p>
+                    <label>
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
+                </p>
             </div>
             <div class="domain-input item place person">
                 <br>
                 <div class="dropdown">
                     <button class="btn" style="width:140px;height:20px">Доб.действие</button>
-                    <div class="dropdown-content scrollable"><select size="5" style="width:280px">
-                        <option>Болит кулак</option>
-                        <option>Жажда</option>
-                        <option>Радость</option>
-                        <option>Парфюм</option>
-                        <option>Уют</option>
-                        <option>Тепло</option>
-                    </select></div>
+                    <label class="dropdown-content scrollable">
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
                 </div>
                 <button style="width:140px;height:20px">Убр.действие</button>
-                <p><select size="5" style="width:280px">
-                    <option>Болит кулак</option>
-                    <option>Жажда</option>
-                    <option>Радость</option>
-                    <option>Парфюм</option>
-                    <option>Уют</option>
-                    <option>Тепло</option>
-                </select></p>
+                <p>
+                    <label>
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
+                </p>
             </div>
             <div class="domain-input person">
                 <br>
                 <div class="dropdown">
                     <button class="btn" style="width:140px;height:20px">Доб.характер</button>
-                    <div class="dropdown-content scrollable"><select size="5" style="width:280px">
-                        <option>Болит кулак</option>
-                        <option>Жажда</option>
-                        <option>Радость</option>
-                        <option>Парфюм</option>
-                        <option>Уют</option>
-                        <option>Тепло</option>
-                    </select></div>
+                    <label class="dropdown-content scrollable">
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
                 </div>
                 <button style="width:140px;height:20px">Убр.характер</button>
-                <p><select size="5" style="width:280px">
-                    <option>Болит кулак</option>
-                    <option>Жажда</option>
-                    <option>Радость</option>
-                    <option>Парфюм</option>
-                    <option>Уют</option>
-                    <option>Тепло</option>
-                </select></p>
+                <p>
+                    <label>
+                        <select size="5" style="width:280px">
+                            <option>Болит кулак</option>
+                            <option>Жажда</option>
+                            <option>Радость</option>
+                            <option>Парфюм</option>
+                            <option>Уют</option>
+                            <option>Тепло</option>
+                        </select>
+                    </label>
+                </p>
             </div>
         </td>
     </tr>
