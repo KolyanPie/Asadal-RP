@@ -1,8 +1,9 @@
+let domain;
+
 function selectDomain() {
     $.each($('input[name="domain"]'), function (i, item) {
         if (item.checked) {
-            let domain = item.value;
-            $('#form').attr('action', '/admin/save' + domain);
+            domain = item.value;
             $.each($('.domain-input'), function (i, element) {
                 element.style.display = 'none';
             })
