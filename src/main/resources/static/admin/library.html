@@ -2,66 +2,222 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Library</title>
+    <title>Библиотека</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="/js/admin/library.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/preview.js"></script>
+    <link href="/css/Moder.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<label onchange="selectDomain()">
-    <input type="radio" name="domain" value="action" checked> Действие
-    <input type="radio" name="domain" value="item"> Предмет
-    <input type="radio" name="domain" value="moodlet"> Мудлет
-    <br>
-    <input type="radio" name="domain" value="person"> Персонаж
-    <input type="radio" name="domain" value="place"> Место
-    <input type="radio" name="domain" value="character"> Характер
-</label>
-<form enctype="multipart/form-data" method="post" id="form">
-    <div class="domain-input action character moodlet person place item">
-        <p>Название:</p>
-        <label><input type="text" name="name" placeholder="Название"></label>
-    </div>
-    <div class="domain-input character moodlet person place item">
-        <p> Описание:</p>
-        <label><textarea name="description"></textarea></label>
-        <br>
-    </div>
-    <div class="domain-input item person place">
-        <label for="picture"> Изображение:<br>
-            <input type="file" name="picture" id="picture">
-            <input type="submit" value="Загрузить">
-        </label>
-        <br>
-    </div>
-    <div class="domain-input action character item person place">
-        <p> Подсказка:</p>
-        <label><textarea name="admin-hint"></textarea></label>
-        <br>
-    </div>
-    <div class="domain-input character">
-        <p> Тип:</p>
-        <label>
-            <input type="radio" value="POSITIVE" name="character-type" checked> Положительная черта
-            <input type="radio" value="NEGATIVE" name="character-type"> Отрицательная черта
-            <input type="radio" value="PROFESSION" name="character-type"> Профессия
-            <input type="radio" value="RACE" name="character-type"> Раса
-        </label><br>
-    </div>
-    <div class="domain-input moodlet">
-        <p>Длительность:</p>
-        <label> <input type="number" name="durability" placeholder="Длительность"></label>
-        <br>
-        <p>Сосредоточенность:</p>
-        <label> <input type="number" name="value" placeholder="Сосредоточенность"></label>
-        <br>
-    </div>
-    <div class="domain-input person">
-        <br>
-        <em> Игровой </em>
-        <label> <input type="checkbox" name="playable"></label>
-        <br>
-    </div>
-    <input type="button" value="Save">
-</form>
+<table class="grand">
+    <tr>
+        <td colspan="3">
+            <a href="Moderator.html">
+                <button style="width:90px;height:20px">Модерация</button>
+            </a>
+            <button id="create-button" style="width:105px;height:20px">Создание</button>
+            <button id="change-button" style="width:105px;height:20px">Изменения</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <label onchange="selectDomain()">
+                <table>
+                    <tr>
+                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="action" checked>Действие
+                        </td>
+                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="item">Предмет⁣⁣⁣
+                        </td>
+                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="moodlet">Мудлет</td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="person">Персонаж
+                        </td>
+                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="place">Место</td>
+                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="character">Характер
+                        </td>
+                    </tr>
+                </table>
+            </label></td>
+        <td>
+        <td rowspan="2">
+            <div><input type="button" value="Удалить"></div>
+            <div class="dropdown-content procr action character moodlet person place item">
+                <label>
+                    <select size="30" style="width:200px">
+                        <option>kfljdkfj</option>
+                        <option>fhdhdf</option>
+                        <option>hfddf</option>
+                        <option>hfddhd</option>
+                        <option>Уют</option>
+                        <option>Тепло</option>
+                    </select>
+                </label>
+            </div>
+        </td>
+    <tr>
+        <td>
+            <form enctype="multipart/form-data" method="post" id="form">
+                <div class="domain-input action character moodlet person place item">
+                    <p>Название:</p>
+                    <label><input type="text" name="name" placeholder="Название" style="width:280px"></label>
+                </div>
+                <div class="domain-input character moodlet person place item">
+                    <p> Описание:</p>
+                    <label>
+                        <textarea name="description" class="procr" size="5" style="width:280px;height:90px"></textarea>
+                    </label>
+                    <br>
+                </div>
+
+                <div class="domain-input action character item person place">
+                    <p> Подсказка:</p>
+                    <label>
+                        <textarea name="admin-hint" class="procr" size="3" style="width:280px;height:50px"></textarea>
+                    </label>
+                    <br>
+                </div>
+                <div class="domain-input character">
+                    <p> Тип:</p>
+                    <label>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="radio" value="POSITIVE" name="character-type" checked> Положительная
+                                    черта<br>
+                                    <input type="radio" value="NEGATIVE" name="character-type"> Отрицательная черта
+                                </td>
+                                <td>
+                                    <input type="radio" value="PROFESSION" name="character-type"> Профессия<br>
+                                    <input type="radio" value="RACE" name="character-type"> Раса
+                                </td>
+                            </tr>
+                        </table>
+                    </label><br>
+                </div>
+                <div class="domain-input moodlet">
+                    <p>Длительность:</p>
+                    <label> <input type="number" name="durability" placeholder="Длительность"></label>
+                    <br>
+                    <p>Сосредоточенность:</p>
+                    <label> <input type="number" name="value" placeholder="Сосредоточенность"></label>
+                    <br>
+                </div>
+                <div class="domain-input person">
+                    <br>
+                    <em> Игровой </em>
+                    <label> <input type="checkbox" name="playable"></label>
+                    <br>
+                </div>
+
+                <div class="domain-input item person place">
+                    <label for="picture" class="preview"> Изображение:<br>
+                        <input type="file" name="picture" id="picture"><br>
+                        <img class="domain-input item" style="width: 98px;
+           height: 100px;object-fit:cover">
+                        <img class="domain-input person place" style="width: 150px;height: 250px;object-fit:cover">
+                    </label>
+                    <br>
+                </div>
+                <div><input id="save" type="button" value="Создать"></div>
+            </form>
+        </td>
+        <td>
+            <div class="domain-input character item place person">
+                <br>
+                <div class="dropdown">
+                    <button class="btn" style="width:140px;height:20px">Доб.мудлет</button>
+                    <div class="dropdown-content procr"><select size="5" style="width:280px">
+                        <option>Болит кулак</option>
+                        <option>Жажда</option>
+                        <option>Радость</option>
+                        <option>Парфюм</option>
+                        <option>Уют</option>
+                        <option>Тепло</option>
+                    </select></div>
+                </div>
+                <button style="width:140px;height:20px">Убр.мудлет</button>
+                <p><select size="5" style="width:280px">
+                    <option>Болит кулак</option>
+                    <option>Жажда</option>
+                    <option>Радость</option>
+                    <option>Парфюм</option>
+                    <option>Уют</option>
+                    <option>Тепло</option>
+                </select></p>
+            </div>
+            <div class="domain-input place">
+                <br>
+                <div class="dropdown">
+                    <button class="btn" style="width:140px;height:20px">Доб.персонажа</button>
+                    <div class="dropdown-content procr"><select size="5" style="width:280px">
+                        <option>Болит кулак</option>
+                        <option>Жажда</option>
+                        <option>Радость</option>
+                        <option>Парфюм</option>
+                        <option>Уют</option>
+                        <option>Тепло</option>
+                    </select></div>
+                </div>
+                <button style="width:140px;height:20px">Убр.персонажа</button>
+                <p><select size="5" style="width:280px">
+                    <option>Болит кулак</option>
+                    <option>Жажда</option>
+                    <option>Радость</option>
+                    <option>Парфюм</option>
+                    <option>Уют</option>
+                    <option>Тепло</option>
+                </select></p>
+            </div>
+            <div class="domain-input item place person">
+                <br>
+                <div class="dropdown">
+                    <button class="btn" style="width:140px;height:20px">Доб.действие</button>
+                    <div class="dropdown-content procr"><select size="5" style="width:280px">
+                        <option>Болит кулак</option>
+                        <option>Жажда</option>
+                        <option>Радость</option>
+                        <option>Парфюм</option>
+                        <option>Уют</option>
+                        <option>Тепло</option>
+                    </select></div>
+                </div>
+                <button style="width:140px;height:20px">Убр.действие</button>
+                <p><select size="5" style="width:280px">
+                    <option>Болит кулак</option>
+                    <option>Жажда</option>
+                    <option>Радость</option>
+                    <option>Парфюм</option>
+                    <option>Уют</option>
+                    <option>Тепло</option>
+                </select></p>
+            </div>
+            <div class="domain-input person">
+                <br>
+                <div class="dropdown">
+                    <button class="btn" style="width:140px;height:20px">Доб.характер</button>
+                    <div class="dropdown-content procr"><select size="5" style="width:280px">
+                        <option>Болит кулак</option>
+                        <option>Жажда</option>
+                        <option>Радость</option>
+                        <option>Парфюм</option>
+                        <option>Уют</option>
+                        <option>Тепло</option>
+                    </select></div>
+                </div>
+                <button style="width:140px;height:20px">Убр.характер</button>
+                <p><select size="5" style="width:280px">
+                    <option>Болит кулак</option>
+                    <option>Жажда</option>
+                    <option>Радость</option>
+                    <option>Парфюм</option>
+                    <option>Уют</option>
+                    <option>Тепло</option>
+                </select></p>
+            </div>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
