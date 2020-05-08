@@ -2,13 +2,9 @@ let domain;
 let isNew = true;
 
 function selectDomain() {
-    $.each($('input[name="domain"]'), function (i, item) {
-        if (item.checked) {
-            domain = item.value;
-            $('.domain-input').css('display', 'none');
-            $('.' + domain).css('display', 'unset');
-        }
-    })
+    domain = $('input[type="radio"][name="domain"]:checked').val();
+    $('.domain-input').css('display', 'none');
+    $('.' + domain).css('display', 'unset');
 }
 
 function clearData() {
