@@ -14,6 +14,13 @@ function selectDomain() {
     })
 }
 
+function clearData() {
+    let $form = $('#form');
+
+    $form.find('input[type="text"], textarea').val('');
+    $form.find('input[type="number"]').val('0');
+}
+
 $(document).ready(function () {
     selectDomain();
 })
