@@ -13,7 +13,7 @@
 <table class="grand">
     <tr>
         <td colspan="3">
-            <a href="Moderator.html">
+            <a href="/admin">
                 <button style="width:90px;height:20px">Модерация</button>
             </a>
             <button id="create-button" style="width:105px;height:20px">Создание</button>
@@ -22,24 +22,49 @@
     </tr>
     <tr>
         <td colspan="2">
-            <label onchange="selectDomain()">
-                <table>
-                    <tr>
-                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="action" checked>Действие
-                        </td>
-                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="item">Предмет⁣⁣⁣
-                        </td>
-                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="moodlet">Мудлет</td>
-                    </tr>
-                    <tr>
-                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="person">Персонаж
-                        </td>
-                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="place">Место</td>
-                        <td><input type="radio" name="domain" style="width:25px;height:20px" value="character">Характер
-                        </td>
-                    </tr>
-                </table>
-            </label></td>
+            <table onchange="selectDomain()">
+                <tr>
+                    <td>
+                        <label>
+                            <input type="radio" name="domain" style="width:25px;height:20px" value="action" checked>
+                            Действие
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="domain" style="width:25px;height:20px" value="item">
+                            Предмет⁣⁣⁣
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="domain" style="width:25px;height:20px" value="moodlet">
+                            Мудлет
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>
+                            <input type="radio" name="domain" style="width:25px;height:20px" value="person">
+                            Персонаж
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="domain" style="width:25px;height:20px" value="place">
+                            Место
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="domain" style="width:25px;height:20px" value="character">
+                            Характер
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </td>
         <td>
         <td rowspan="2">
             <div><input type="button" value="Удалить"></div>
