@@ -56,6 +56,18 @@ public class MoodletService {
         return true;
     }
 
+    public String updateMoodlet(MoodletDto moodletDto) {
+        Moodlet moodletFromDb = getMoodlet(moodletDto.getId());
+        String name = moodletDto.getName();
+        if (StringUtils.isEmpty(name) || (!name.equals(moodletFromDb.getName()) && moodletRepo.findByName(name) != null)) {
+            return nameUnavailable;
+        }
+        Moodlet moodlet = createMoodlet(moodletDto);
+
+        moodletRepo.save(moodlet);
+        return moodlet.getName();
+    }
+
     private Moodlet createMoodlet(MoodletDto moodletDto) {
         Moodlet moodlet = new Moodlet();
 

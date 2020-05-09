@@ -32,6 +32,19 @@ public class MoodletController {
         }
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<String> updateAction(MoodletDto moodletDto) {
+        if (moodletService.getMoodlet(moodletDto.getId()) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        String answer = moodletService.updateMoodlet(moodletDto);
+        if (answer.equals(moodletDto.getName())) {
+            return ResponseEntity.ok(answer);
+        } else {
+            return new ResponseEntity<>(answer, HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/get")
     public ResponseEntity<Moodlet> getMoodlet(@RequestParam Long id) {
         Moodlet moodlet = moodletService.getMoodlet(id);
