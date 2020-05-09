@@ -101,6 +101,7 @@ public class ItemService {
             return null;
         }
 
+        item.setId(itemDto.getId());
         item.setName(itemDto.getName());
         item.setDescription(itemDto.getDescription());
         item.setPicture(filename);
