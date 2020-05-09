@@ -21,11 +21,22 @@ public class ActionController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveAction(
-            ActionDto action
-    ) {
+    public ResponseEntity<String> saveAction(ActionDto action) {
         String answer = actionService.saveAction(action);
         if (answer.equals(action.getName())) {
+            return ResponseEntity.ok(answer);
+        } else {
+            return new ResponseEntity<>(answer, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<String> updateAction(ActionDto actionDto) {
+        if (actionService.getAction(actionDto.getId()) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        String answer = actionService.updateAction(actionDto);
+        if (answer.equals(actionDto.getName())) {
             return ResponseEntity.ok(answer);
         } else {
             return new ResponseEntity<>(answer, HttpStatus.BAD_REQUEST);
@@ -44,8 +55,6 @@ public class ActionController {
 
     @DeleteMapping("/remove")
     public ResponseEntity<Long> removeAction(@RequestParam Long id) {
-        Action action = actionService.getAction(id);
-
         if (actionService.removeAction(id)) {
             return ResponseEntity.ok(id);
         }

@@ -55,9 +55,22 @@ public class ActionService {
         return true;
     }
 
+    public String updateAction(ActionDto actionDto) {
+        Action actionFromDb = getAction(actionDto.getId());
+        String name = actionDto.getName();
+        if (StringUtils.isEmpty(name) || (!name.equals(actionFromDb.getName()) && actionRepo.findByName(name) != null)) {
+            return nameUnavailable;
+        }
+        Action action = createAction(actionDto);
+
+        actionRepo.save(action);
+        return action.getName();
+    }
+
     private Action createAction(ActionDto actionDto) {
         Action action = new Action();
 
+        action.setId(actionDto.getId());
         action.setName(actionDto.getName());
         action.setAdminHint(actionDto.getAdminHint());
         return action;
