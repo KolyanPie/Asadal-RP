@@ -13,7 +13,7 @@ public class Place {
     @NotBlank(message = "name cannot be empty")
     @Size(max = 30, message = "max size is 30")
     private String name;
-    @Size(max = 255, message = "max size is 255")
+    @Size(max = 1024, message = "max size is 1024")
     private String description;
     private String picture;
     @Size(max = 255, message = "max size is 255")

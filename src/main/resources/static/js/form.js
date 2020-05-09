@@ -1,10 +1,9 @@
-function sendForm(form, url, success, error) {
-    let form_data = new FormData(form);
+function sendForm(formData, url, success, error) {
     $.ajax({
         type: 'POST',
         enctype: 'multipart/form-data',
         url: url,
-        data: form_data,
+        data: formData,
         processData: false,
         contentType: false,
         cache: false,

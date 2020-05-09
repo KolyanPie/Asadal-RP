@@ -4,12 +4,14 @@ let isNew = true;
 function selectDomain() {
     clearData();
     domain = $('input[type="radio"][name="domain"]:checked').val();
+    $('textarea[name="description"]').attr('maxlength', domain === 'place' ? 1024 : 255);
     $('#select-domain').select2({
-        templateSelection: fillForm,
         ajax: {
             url: '/admin/' + domain + '/list',
             type: 'GET'
         }
+    }).on('select2:select', function (event) {
+        fillForm(event.params.data);
     });
     $('.domain-input').css('display', 'none');
     $('.' + domain).css('display', 'unset');
@@ -17,7 +19,7 @@ function selectDomain() {
 
 function clearData() {
     $('#save').val("Создать");
-    $('#select-domain').val('');
+    $('#select-domain').val(null).trigger("change");
     isNew = true;
     let $form = $('#form');
 
@@ -77,11 +79,22 @@ $(document).ready(function () {
         });
     });
     $('#save').click(function () {
+        let formData = new FormData($('#form')[0]);
+        formData.append("moodlets", $('#moodlets').val());
+        formData.append("actions", $('#actions').val());
+        formData.append("persons", $('#persons').val());
+        formData.append("items", $('#items').val());
         sendForm(
-            $('#form')[0],
+            formData,
             '/admin/' + domain + (isNew ? '/save' : '/update?id=' + $('input[name="id"]').val()),
             clearData,
             alertError
         );
+    });
+    $('.select-set').select2({
+        ajax: {
+            url: '/admin/' + 'moodlet' + '/list',
+            type: 'GET'
+        }
     });
 })
