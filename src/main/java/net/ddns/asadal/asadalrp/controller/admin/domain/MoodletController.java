@@ -1,13 +1,11 @@
 package net.ddns.asadal.asadalrp.controller.admin.domain;
 
+import net.ddns.asadal.asadalrp.domain.Moodlet;
 import net.ddns.asadal.asadalrp.domain.dto.MoodletDto;
 import net.ddns.asadal.asadalrp.service.admin.domain.MoodletService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +20,7 @@ public class MoodletController {
     }
 
     @PostMapping("/save/moodlet")
-    public ResponseEntity<String> saveAction(
+    public ResponseEntity<String> saveMoodlet(
             MoodletDto moodlet
     ) {
         String answer = moodletService.saveMoodlet(moodlet);
@@ -31,6 +29,26 @@ public class MoodletController {
         } else {
             return new ResponseEntity<>(answer, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<Moodlet> getMoodlet(@RequestParam Long id) {
+        Moodlet moodlet = moodletService.getMoodlet(id);
+
+        if (moodlet == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(moodlet);
+    }
+
+    @DeleteMapping("/remove")
+    public ResponseEntity<Long> removeMoodlet(@RequestParam Long id) {
+        Moodlet moodlet = moodletService.getMoodlet(id);
+
+        if (moodletService.removeMoodlet(id)) {
+            return ResponseEntity.ok(id);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/list/moodlet")

@@ -41,14 +41,6 @@ public class ActionService {
         }}).collect(Collectors.toList());
     }
 
-    private Action createAction(ActionDto actionDto) {
-        Action action = new Action();
-
-        action.setName(actionDto.getName());
-        action.setAdminHint(actionDto.getAdminHint());
-        return action;
-    }
-
     public Action getAction(Long id) {
         return actionRepo.findById(id).orElse(null);
     }
@@ -61,5 +53,13 @@ public class ActionService {
         }
         actionRepo.delete(action);
         return true;
+    }
+
+    private Action createAction(ActionDto actionDto) {
+        Action action = new Action();
+
+        action.setName(actionDto.getName());
+        action.setAdminHint(actionDto.getAdminHint());
+        return action;
     }
 }

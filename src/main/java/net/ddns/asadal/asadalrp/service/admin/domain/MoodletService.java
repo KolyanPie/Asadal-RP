@@ -42,6 +42,20 @@ public class MoodletService {
                 }}).collect(Collectors.toList());
     }
 
+    public Moodlet getMoodlet(Long id) {
+        return moodletRepo.findById(id).orElse(null);
+    }
+
+    public boolean removeMoodlet(Long id) {
+        Moodlet moodlet = getMoodlet(id);
+
+        if (moodlet == null) {
+            return false;
+        }
+        moodletRepo.delete(moodlet);
+        return true;
+    }
+
     private Moodlet createMoodlet(MoodletDto moodletDto) {
         Moodlet moodlet = new Moodlet();
 
