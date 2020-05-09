@@ -22,7 +22,27 @@ function clearData() {
 }
 
 let fillForm = function (data) {
-    console.log(data);
+    $.ajax({
+        type: 'GET',
+        url: '/admin/' + domain + '/get?' + 'id=' + data.id,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 800000,
+        error: alertError,
+        success: function (data) {
+            console.log(data);
+            $('input[name="id"]').val(data.id);
+            $('input[name="name"]').val(data.name);
+            $('textarea[name="adminHint"]').val(data.adminHint);
+            $('input[name="characterType"]').val(data.characterType);
+            $('textarea[name="description"]').val(data.description);
+            $('input[name="durability"]').val(data.durability);
+            $('input[name="value"]').val(data.value);
+            $('input[name="playable"]').val(data.playable);
+            $('input[name="picture"]').val(data.picture);
+        }
+    });
 }
 
 let alertError = function (jqXHR) {
@@ -51,7 +71,8 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             timeout: 800000,
-            error: alertError
+            error: alertError,
+            success: clearData
         });
     });
     $('#save').click(function () {
