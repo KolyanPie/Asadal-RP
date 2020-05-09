@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/admin/moodlet")
 public class MoodletController {
     private final MoodletService moodletService;
 
@@ -19,7 +20,7 @@ public class MoodletController {
         this.moodletService = moodletService;
     }
 
-    @PostMapping("/save/moodlet")
+    @PostMapping("/save")
     public ResponseEntity<String> saveMoodlet(
             MoodletDto moodlet
     ) {
@@ -51,7 +52,7 @@ public class MoodletController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/list/moodlet")
+    @GetMapping("/list")
     public ResponseEntity<Map<String, List<Map<String, Object>>>> findMoodlet(
             @RequestParam(required = false, defaultValue = "") String term
     ) {
