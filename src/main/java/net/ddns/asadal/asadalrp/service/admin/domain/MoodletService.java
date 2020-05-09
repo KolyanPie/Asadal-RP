@@ -71,6 +71,7 @@ public class MoodletService {
     private Moodlet createMoodlet(MoodletDto moodletDto) {
         Moodlet moodlet = new Moodlet();
 
+        moodlet.setId(moodletDto.getId());
         moodlet.setName(moodletDto.getName());
         moodlet.setDescription(moodletDto.getDescription());
         moodlet.setDurability(moodletDto.getDurability());

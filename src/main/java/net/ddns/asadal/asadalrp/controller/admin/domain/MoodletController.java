@@ -33,7 +33,10 @@ public class MoodletController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<String> updateAction(MoodletDto moodletDto) {
+    public ResponseEntity<String> updateMoodlet(MoodletDto moodletDto) {
+        if (moodletDto.getId() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         if (moodletService.getMoodlet(moodletDto.getId()) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

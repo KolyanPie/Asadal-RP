@@ -2,6 +2,7 @@ let domain;
 let isNew = true;
 
 function selectDomain() {
+    clearData();
     domain = $('input[type="radio"][name="domain"]:checked').val();
     $('#select-domain').select2({
         templateSelection: fillForm,
@@ -15,13 +16,18 @@ function selectDomain() {
 }
 
 function clearData() {
+    $('#save').val("Создать");
+    $('#select-domain').val('');
+    isNew = true;
     let $form = $('#form');
 
-    $form.find('input[type="text"], textarea').val('');
+    $form.find('input[type="hidden"], input[type="text"], textarea').val('');
     $form.find('input[type="number"]').val('0');
 }
 
 let fillForm = function (data) {
+    isNew = false;
+    $('#save').val("Изменить");
     $.ajax({
         type: 'GET',
         url: '/admin/' + domain + '/get?' + 'id=' + data.id,
@@ -31,7 +37,6 @@ let fillForm = function (data) {
         timeout: 800000,
         error: alertError,
         success: function (data) {
-            console.log(data);
             $('input[name="id"]').val(data.id);
             $('input[name="name"]').val(data.name);
             $('textarea[name="adminHint"]').val(data.adminHint);
@@ -52,14 +57,10 @@ let alertError = function (jqXHR) {
 $(document).ready(function () {
     selectDomain();
     $('#create-button').click(function () {
-        $('#save').val("Создать");
-        isNew = true;
         $('.change').css('display', 'none');
         clearData();
     });
     $('#change-button').click(function () {
-        $('#save').val("Изменить");
-        isNew = false;
         $('.change').css('display', 'unset');
         clearData();
     });
@@ -78,7 +79,7 @@ $(document).ready(function () {
     $('#save').click(function () {
         sendForm(
             $('#form')[0],
-            '/admin/' + domain + '/save',
+            '/admin/' + domain + (isNew ? '/save' : '/update?id=' + $('input[name="id"]').val()),
             clearData,
             alertError
         );

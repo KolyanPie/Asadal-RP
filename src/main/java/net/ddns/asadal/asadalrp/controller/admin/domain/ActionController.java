@@ -32,6 +32,9 @@ public class ActionController {
 
     @PostMapping("/update")
     public ResponseEntity<String> updateAction(ActionDto actionDto) {
+        if (actionDto.getId() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         if (actionService.getAction(actionDto.getId()) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

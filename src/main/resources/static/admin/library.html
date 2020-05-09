@@ -84,12 +84,12 @@
                 </div>
                 <div class="domain-input action character moodlet person place item">
                     <p>Название:</p>
-                    <label><input type="text" name="name" placeholder="Название" style="width:280px"></label>
+                    <label><input type="text" maxlength="30" name="name" placeholder="Название" style="width:280px"></label>
                 </div>
                 <div class="domain-input character moodlet person place item">
                     <p> Описание:</p>
                     <label>
-                        <textarea name="description" class="scrollable" style="width:280px;height:90px"></textarea>
+                        <textarea name="description" maxlength="255" class="scrollable" style="width:280px;height:90px"></textarea>
                     </label>
                     <br>
                 </div>
@@ -97,7 +97,7 @@
                 <div class="domain-input action character item person place">
                     <p> Подсказка:</p>
                     <label>
-                        <textarea name="adminHint" class="scrollable" style="width:280px;height:50px"></textarea>
+                        <textarea name="adminHint" maxlength="255" class="scrollable" style="width:280px;height:50px"></textarea>
                     </label>
                     <br>
                 </div>
