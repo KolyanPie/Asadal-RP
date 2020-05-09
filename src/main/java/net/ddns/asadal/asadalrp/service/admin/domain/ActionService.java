@@ -48,4 +48,18 @@ public class ActionService {
         action.setAdminHint(actionDto.getAdminHint());
         return action;
     }
+
+    public Action getAction(Long id) {
+        return actionRepo.findById(id).orElse(null);
+    }
+
+    public boolean removeAction(Long id) {
+        Action action = getAction(id);
+
+        if (action == null) {
+            return false;
+        }
+        actionRepo.delete(action);
+        return true;
+    }
 }

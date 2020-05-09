@@ -1,5 +1,6 @@
 package net.ddns.asadal.asadalrp.controller.admin.domain;
 
+import net.ddns.asadal.asadalrp.domain.Action;
 import net.ddns.asadal.asadalrp.domain.dto.ActionDto;
 import net.ddns.asadal.asadalrp.service.admin.domain.ActionService;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,26 @@ public class ActionController {
         } else {
             return new ResponseEntity<>(answer, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<Action> getAction(@RequestParam Long id) {
+        Action action = actionService.getAction(id);
+
+        if (action == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(action);
+    }
+
+    @DeleteMapping("/remove")
+    public ResponseEntity<Long> removeAction(@RequestParam Long id) {
+        Action action = actionService.getAction(id);
+
+        if (actionService.removeAction(id)) {
+            return ResponseEntity.ok(id);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/list")
