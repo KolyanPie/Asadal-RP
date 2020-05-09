@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Библиотека</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script src="/js/jquery/jquery.tmpl.js" type="text/javascript"></script>
+
     <script src="/js/form.js"></script>
     <script src="/js/admin/library.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/js/preview.js"></script>
     <link href="/css/Moder.css" type="text/css" rel="stylesheet">
 </head>
@@ -70,14 +73,7 @@
         <td rowspan="2">
             <div><input type="button" value="Удалить"></div>
             <label class="scrollable change" style="display: none">
-                <select size="30" style="width:200px">
-                    <option>kfljdkfj</option>
-                    <option>fhdhdf</option>
-                    <option>hfddf</option>
-                    <option>hfddhd</option>
-                    <option>Уют</option>
-                    <option>Тепло</option>
-                </select>
+                <select id="change" size="30" style="width:200px"></select>
             </label>
         </td>
     <tr>
@@ -112,9 +108,8 @@
                             <td>
                                 <label>
                                     <input type="radio" value="POSITIVE" name="character-type" checked>
-                                    Положительная
-                                </label>
-                                черта<br>
+                                    Положительная черта
+                                </label><br>
                                 <label>
                                     <input type="radio" value="NEGATIVE" name="character-type">
                                     Отрицательная черта
@@ -124,7 +119,7 @@
                                 <label>
                                     <input type="radio" value="PROFESSION" name="character-type">
                                     Профессия
-                                </label> Профессия<br>
+                                </label><br>
                                 <label>
                                     <input type="radio" value="RACE" name="character-type">
                                     Раса
@@ -152,8 +147,10 @@
                 <div class="domain-input item person place">
                     <label for="picture" class="preview"> Изображение:<br>
                         <input type="file" name="picture" id="picture"><br>
-                        <img src="#" alt="preview" class="domain-input item" style="width: 98px;height: 100px;object-fit:cover">
-                        <img src="#" alt="preview" class="domain-input person place" style="width: 150px;height: 250px;object-fit:cover">
+                        <img src="#" alt="preview" class="domain-input item"
+                             style="width: 98px;height: 100px;object-fit:cover">
+                        <img src="#" alt="preview" class="domain-input person place"
+                             style="width: 150px;height: 250px;object-fit:cover">
                     </label>
                     <br>
                 </div>
