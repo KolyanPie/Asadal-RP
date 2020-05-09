@@ -43,24 +43,37 @@ let fillForm = function (data) {
             $('input[name="id"]').val(data.id);
             $('input[name="name"]').val(data.name);
             $('textarea[name="adminHint"]').val(data.adminHint);
-            $('input[name="characterType"]').val(data.characterType);
+            $('input[name="characterType"]:checked').removeAttr("checked");
+            $('input[name="characterType"][value="' + data.characterType + '"]').attr("checked", "checked");
             $('textarea[name="description"]').val(data.description);
             $('input[name="durability"]').val(data.durability);
             $('input[name="value"]').val(data.value);
-            $('input[name="playable"]').val(data.playable);
+            if (data.playable) {
+                $('input[name="playable"]').attr("checked", "checked");
+            } else {
+                $('input[name="playable"]:checked').removeAttr("checked");
+            }
             $('input[name="picture"]').val(data.picture);
-            $('#moodlets').val(data.moodlets.map(function (data) {
-                return data.id.toString();
-            })).trigger("change");
-            $('#actions').val(data.actions.map(function (data) {
-                return data.id.toString();
-            })).trigger("change");
-            $('#persons').val(data.persons.map(function (data) {
-                return data.id.toString();
-            })).trigger("change");
-            $('#characters').val(data.characters.map(function (data) {
-                return data.id.toString();
-            })).trigger("change");
+            if (data.moodlets) {
+                $('#moodlets').val(data.moodlets.map(function (data) {
+                    return data.id.toString();
+                })).trigger("change");
+            }
+            if (data.actions) {
+                $('#actions').val(data.actions.map(function (data) {
+                    return data.id.toString();
+                })).trigger("change");
+            }
+            if (data.persons) {
+                $('#persons').val(data.persons.map(function (data) {
+                    return data.id.toString();
+                })).trigger("change");
+            }
+            if (data.characters) {
+                $('#characters').val(data.characters.map(function (data) {
+                    return data.id.toString();
+                })).trigger("change");
+            }
         }
     });
 }
@@ -112,19 +125,19 @@ $(document).ready(function () {
     });
     $('#actions').select2({
         ajax: {
-            url: '/admin/actions/list',
+            url: '/admin/action/list',
             type: 'GET'
         }
     });
     $('#persons').select2({
         ajax: {
-            url: '/admin/persons/list',
+            url: '/admin/person/list',
             type: 'GET'
         }
     });
     $('#characters').select2({
         ajax: {
-            url: '/admin/characters/list',
+            url: '/admin/character/list',
             type: 'GET'
         }
     });
