@@ -15,6 +15,26 @@ function selectDomain() {
     });
     $('.domain-input').css('display', 'none');
     $('.' + domain).css('display', 'unset');
+    ajaxToSelectSet('moodlet');
+    ajaxToSelectSet('action');
+    ajaxToSelectSet('person');
+    ajaxToSelectSet('character');
+}
+
+function ajaxToSelectSet(domain) {
+    $.ajax({
+        url: '/admin/' + domain + '/list',
+        type: 'GET',
+        success: function (data) {
+            let $selectSet = $('#' + domain + 's');
+
+            $selectSet.empty();
+            console.log(data.results);
+            $selectSet.select2({
+                data: data.results
+            });
+        }
+    });
 }
 
 function clearData() {
@@ -23,7 +43,7 @@ function clearData() {
     isNew = true;
     let $form = $('#form');
 
-    $form.find('input[type="hidden"], input[type="text"], textarea').val('');
+    $form.find('input[type="hidden"], input[type="text"], textarea, input[type="file"]').val('');
     $form.find('input[type="number"]').val('0');
     $('.select-set').val(null).trigger("change");
 }
@@ -53,7 +73,7 @@ let fillForm = function (data) {
             } else {
                 $('input[name="playable"]:checked').removeAttr("checked");
             }
-            $('input[name="picture"]').val(data.picture);
+            // $('input[name="picture"]').val(data.picture);
             if (data.moodlets) {
                 $('#moodlets').val(data.moodlets.map(function (data) {
                     return data.id.toString();
@@ -116,29 +136,5 @@ $(document).ready(function () {
             clearData,
             alertError
         );
-    });
-    $('#moodlets').select2({
-        ajax: {
-            url: '/admin/moodlet/list',
-            type: 'GET'
-        }
-    });
-    $('#actions').select2({
-        ajax: {
-            url: '/admin/action/list',
-            type: 'GET'
-        }
-    });
-    $('#persons').select2({
-        ajax: {
-            url: '/admin/person/list',
-            type: 'GET'
-        }
-    });
-    $('#characters').select2({
-        ajax: {
-            url: '/admin/character/list',
-            type: 'GET'
-        }
     });
 })
