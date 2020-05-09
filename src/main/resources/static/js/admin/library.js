@@ -25,6 +25,7 @@ function clearData() {
 
     $form.find('input[type="hidden"], input[type="text"], textarea').val('');
     $form.find('input[type="number"]').val('0');
+    $('.select-set').val(null).trigger("change");
 }
 
 let fillForm = function (data) {
@@ -48,6 +49,18 @@ let fillForm = function (data) {
             $('input[name="value"]').val(data.value);
             $('input[name="playable"]').val(data.playable);
             $('input[name="picture"]').val(data.picture);
+            $('#moodlets').val(data.moodlets.map(function (data) {
+                return data.id.toString();
+            })).trigger("change");
+            $('#actions').val(data.actions.map(function (data) {
+                return data.id.toString();
+            })).trigger("change");
+            $('#persons').val(data.persons.map(function (data) {
+                return data.id.toString();
+            })).trigger("change");
+            $('#characters').val(data.characters.map(function (data) {
+                return data.id.toString();
+            })).trigger("change");
         }
     });
 }
@@ -83,7 +96,7 @@ $(document).ready(function () {
         formData.append("moodlets", $('#moodlets').val());
         formData.append("actions", $('#actions').val());
         formData.append("persons", $('#persons').val());
-        formData.append("items", $('#items').val());
+        formData.append("characters", $('#characters').val());
         sendForm(
             formData,
             '/admin/' + domain + (isNew ? '/save' : '/update?id=' + $('input[name="id"]').val()),
@@ -91,9 +104,27 @@ $(document).ready(function () {
             alertError
         );
     });
-    $('.select-set').select2({
+    $('#moodlets').select2({
         ajax: {
-            url: '/admin/' + 'moodlet' + '/list',
+            url: '/admin/moodlet/list',
+            type: 'GET'
+        }
+    });
+    $('#actions').select2({
+        ajax: {
+            url: '/admin/actions/list',
+            type: 'GET'
+        }
+    });
+    $('#persons').select2({
+        ajax: {
+            url: '/admin/persons/list',
+            type: 'GET'
+        }
+    });
+    $('#characters').select2({
+        ajax: {
+            url: '/admin/characters/list',
             type: 'GET'
         }
     });
