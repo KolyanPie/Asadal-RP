@@ -95,24 +95,26 @@ public class PlaceService {
     private Place createPlace(PlaceDto placeDto) {
         Place place = new Place();
         MultipartFile picture = placeDto.getPicture();
-        String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
-        File uploadDir = new File(uploadPath);
+        if (picture != null && !picture.isEmpty()) {
+            String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
+            File uploadDir = new File(uploadPath);
 
-        if (!uploadDir.exists()) {
-            if (!uploadDir.mkdir()) {
+            if (!uploadDir.exists()) {
+                if (!uploadDir.mkdir()) {
+                    return null;
+                }
+            }
+            try {
+                picture.transferTo(new File(uploadPath + "/" + filename));
+            } catch (IOException e) {
                 return null;
             }
-        }
-        try {
-            picture.transferTo(new File(uploadPath + "/" + filename));
-        } catch (IOException e) {
-            return null;
+            place.setPicture(filename);
         }
 
         place.setId(placeDto.getId());
         place.setName(placeDto.getName());
         place.setDescription(placeDto.getDescription());
-        place.setPicture(filename);
         place.setAdminHint(placeDto.getAdminHint());
         place.setMoodlets(new HashSet<>(moodletRepo.findAllById(placeDto.getMoodlets())));
         place.setActions(new HashSet<>(actionRepo.findAllById(placeDto.getActions())));

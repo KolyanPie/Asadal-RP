@@ -104,24 +104,25 @@ public class PersonService {
     private Person createPerson(PersonDto personDto) {
         Person person = new Person();
         MultipartFile picture = personDto.getPicture();
-        String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
-        File uploadDir = new File(uploadPath);
+        if (picture != null && !picture.isEmpty()) {
+            String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
+            File uploadDir = new File(uploadPath);
 
-        if (!uploadDir.exists()) {
-            if (!uploadDir.mkdir()) {
+            if (!uploadDir.exists()) {
+                if (!uploadDir.mkdir()) {
+                    return null;
+                }
+            }
+            try {
+                picture.transferTo(new File(uploadPath + "/" + filename));
+            } catch (IOException e) {
                 return null;
             }
+            person.setPicture(filename);
         }
-        try {
-            picture.transferTo(new File(uploadPath + "/" + filename));
-        } catch (IOException e) {
-            return null;
-        }
-
         person.setId(personDto.getId());
         person.setName(personDto.getName());
         person.setDescription(personDto.getDescription());
-        person.setPicture(filename);
         person.setAdminHint(personDto.getAdminHint());
         person.setPlayable(personDto.isPlayable());
         person.setActions(new HashSet<>(actionRepo.findAllById(personDto.getActions())));

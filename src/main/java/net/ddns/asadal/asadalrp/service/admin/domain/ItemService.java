@@ -87,24 +87,25 @@ public class ItemService {
     private Item createItem(ItemDto itemDto) {
         Item item = new Item();
         MultipartFile picture = itemDto.getPicture();
-        String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
-        File uploadDir = new File(uploadPath);
+        if (picture != null && !picture.isEmpty()) {
+            String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
+            File uploadDir = new File(uploadPath);
 
-        if (!uploadDir.exists()) {
-            if (!uploadDir.mkdir()) {
+            if (!uploadDir.exists()) {
+                if (!uploadDir.mkdir()) {
+                    return null;
+                }
+            }
+            try {
+                picture.transferTo(new File(uploadPath + "/" + filename));
+            } catch (IOException e) {
                 return null;
             }
+            item.setPicture(filename);
         }
-        try {
-            picture.transferTo(new File(uploadPath + "/" + filename));
-        } catch (IOException e) {
-            return null;
-        }
-
         item.setId(itemDto.getId());
         item.setName(itemDto.getName());
         item.setDescription(itemDto.getDescription());
-        item.setPicture(filename);
         item.setAdminHint(itemDto.getAdminHint());
         item.setMoodlets(new HashSet<>(moodletRepo.findAllById(itemDto.getMoodlets())));
         item.setActions(new HashSet<>(actionRepo.findAllById(itemDto.getActions())));
