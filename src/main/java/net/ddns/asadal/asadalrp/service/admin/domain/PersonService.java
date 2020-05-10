@@ -109,7 +109,11 @@ public class PersonService {
         person.setId(personDto.getId());
         person.setName(personDto.getName());
         person.setDescription(personDto.getDescription());
-        person.setPicture(filename);
+        if (filename.equals("")) {
+            person.setPicture(personRepo.findByName(person.getName()).getPicture());
+        } else {
+            person.setPicture(filename);
+        }
         person.setAdminHint(personDto.getAdminHint());
         person.setPlayable(personDto.isPlayable());
         person.setActions(new HashSet<>(actionRepo.findAllById(personDto.getActions())));

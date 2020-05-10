@@ -103,7 +103,11 @@ public class PlaceService {
         place.setId(placeDto.getId());
         place.setName(placeDto.getName());
         place.setDescription(placeDto.getDescription());
-        place.setPicture(filename);
+        if (filename.equals("")) {
+            place.setPicture(placeRepo.findByName(place.getName()).getPicture());
+        } else {
+            place.setPicture(filename);
+        }
         place.setAdminHint(placeDto.getAdminHint());
         place.setMoodlets(new HashSet<>(moodletRepo.findAllById(placeDto.getMoodlets())));
         place.setActions(new HashSet<>(actionRepo.findAllById(placeDto.getActions())));

@@ -100,7 +100,11 @@ public class ItemService {
         item.setId(itemDto.getId());
         item.setName(itemDto.getName());
         item.setDescription(itemDto.getDescription());
-        item.setPicture(filename);
+        if (filename.equals("")) {
+            item.setPicture(itemRepo.findByName(item.getName()).getPicture());
+        } else {
+            item.setPicture(filename);
+        }
         item.setAdminHint(itemDto.getAdminHint());
         item.setMoodlets(new HashSet<>(moodletRepo.findAllById(itemDto.getMoodlets())));
         item.setActions(new HashSet<>(actionRepo.findAllById(itemDto.getActions())));
