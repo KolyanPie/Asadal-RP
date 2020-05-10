@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/admin")
-public class LibraryController {
+public class AdminController {
     @GetMapping("/library")
     public ModelAndView library() {
         return new ModelAndView("/static/admin/library.html");
