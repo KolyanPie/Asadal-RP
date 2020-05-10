@@ -19,24 +19,24 @@ import java.util.stream.Collectors;
 
 @Service
 public class PlaceService {
-    @Value("${upload.path}")
-    private String uploadPath;
     @Value("${error.name.unavailable}")
     private String nameUnavailable;
     @Value("${error.file.trouble}")
     private String fileTrouble;
 
+    private final FileUtil fileUtil;
     private final PlaceRepo placeRepo;
     private final MoodletRepo moodletRepo;
     private final ActionRepo actionRepo;
     private final PersonRepo personRepo;
 
     public PlaceService(
-            PlaceRepo placeRepo,
+            FileUtil fileUtil, PlaceRepo placeRepo,
             MoodletRepo moodletRepo,
             ActionRepo actionRepo,
             PersonRepo personRepo
     ) {
+        this.fileUtil = fileUtil;
         this.placeRepo = placeRepo;
         this.moodletRepo = moodletRepo;
         this.actionRepo = actionRepo;
@@ -94,7 +94,7 @@ public class PlaceService {
     }
 
     private Place createPlace(PlaceDto placeDto) {
-        String filename = FileUtil.saveFile(placeDto.getPicture());
+        String filename = fileUtil.saveFile(placeDto.getPicture());
         if (filename == null) {
             return null;
         }

@@ -15,22 +15,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
-    @Value("${upload.path}")
-    private String uploadPath;
     @Value("${error.name.unavailable}")
     private String nameUnavailable;
     @Value("${error.file.trouble}")
     private String fileTrouble;
 
+    private final FileUtil fileUtil;
     private final PersonRepo personRepo;
     private final ActionRepo actionRepo;
     private final CharacterRepo characterRepo;
 
     public PersonService(
-            PersonRepo personRepo,
+            FileUtil fileUtil, PersonRepo personRepo,
             ActionRepo actionRepo,
             CharacterRepo characterRepo
     ) {
+        this.fileUtil = fileUtil;
         this.personRepo = personRepo;
         this.actionRepo = actionRepo;
         this.characterRepo = characterRepo;
@@ -100,7 +100,7 @@ public class PersonService {
     }
 
     private Person createPerson(PersonDto personDto) {
-        String filename = FileUtil.saveFile(personDto.getPicture());
+        String filename = fileUtil.saveFile(personDto.getPicture());
         if (filename == null) {
             return null;
         }

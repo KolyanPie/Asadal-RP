@@ -18,18 +18,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class ItemService {
-    @Value("${upload.path}")
-    private String uploadPath;
     @Value("${error.name.unavailable}")
     private String nameUnavailable;
     @Value("${error.file.trouble}")
     private String fileTrouble;
 
+    private final FileUtil fileUtil;
     private final ItemRepo itemRepo;
     private final MoodletRepo moodletRepo;
     private final ActionRepo actionRepo;
 
-    public ItemService(ItemRepo itemRepo, MoodletRepo moodletRepo, ActionRepo actionRepo) {
+    public ItemService(
+            FileUtil fileUtil,
+            ItemRepo itemRepo,
+            MoodletRepo moodletRepo,
+            ActionRepo actionRepo
+    ) {
+        this.fileUtil = fileUtil;
         this.itemRepo = itemRepo;
         this.moodletRepo = moodletRepo;
         this.actionRepo = actionRepo;
@@ -86,7 +91,7 @@ public class ItemService {
     }
 
     private Item createItem(ItemDto itemDto) {
-        String filename = FileUtil.saveFile(itemDto.getPicture());
+        String filename = fileUtil.saveFile(itemDto.getPicture());
         if (filename == null) {
             return null;
         }
