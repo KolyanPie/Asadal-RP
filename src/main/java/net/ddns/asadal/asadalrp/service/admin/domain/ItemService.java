@@ -5,14 +5,15 @@ import net.ddns.asadal.asadalrp.domain.dto.ItemDto;
 import net.ddns.asadal.asadalrp.repo.ActionRepo;
 import net.ddns.asadal.asadalrp.repo.ItemRepo;
 import net.ddns.asadal.asadalrp.repo.MoodletRepo;
+import net.ddns.asadal.asadalrp.util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,27 +86,16 @@ public class ItemService {
     }
 
     private Item createItem(ItemDto itemDto) {
-        Item item = new Item();
-        MultipartFile picture = itemDto.getPicture();
-        if (picture != null && !picture.isEmpty()) {
-            String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                if (!uploadDir.mkdir()) {
-                    return null;
-                }
-            }
-            try {
-                picture.transferTo(new File(uploadPath + "/" + filename));
-            } catch (IOException e) {
-                return null;
-            }
-            item.setPicture(filename);
+        String filename = FileUtil.saveFile(itemDto.getPicture());
+        if (filename == null) {
+            return null;
         }
+        Item item = new Item();
+
         item.setId(itemDto.getId());
         item.setName(itemDto.getName());
         item.setDescription(itemDto.getDescription());
+        item.setPicture(filename);
         item.setAdminHint(itemDto.getAdminHint());
         item.setMoodlets(new HashSet<>(moodletRepo.findAllById(itemDto.getMoodlets())));
         item.setActions(new HashSet<>(actionRepo.findAllById(itemDto.getActions())));

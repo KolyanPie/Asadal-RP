@@ -5,13 +5,11 @@ import net.ddns.asadal.asadalrp.domain.dto.PersonDto;
 import net.ddns.asadal.asadalrp.repo.ActionRepo;
 import net.ddns.asadal.asadalrp.repo.CharacterRepo;
 import net.ddns.asadal.asadalrp.repo.PersonRepo;
+import net.ddns.asadal.asadalrp.util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -102,27 +100,16 @@ public class PersonService {
     }
 
     private Person createPerson(PersonDto personDto) {
-        Person person = new Person();
-        MultipartFile picture = personDto.getPicture();
-        if (picture != null && !picture.isEmpty()) {
-            String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                if (!uploadDir.mkdir()) {
-                    return null;
-                }
-            }
-            try {
-                picture.transferTo(new File(uploadPath + "/" + filename));
-            } catch (IOException e) {
-                return null;
-            }
-            person.setPicture(filename);
+        String filename = FileUtil.saveFile(personDto.getPicture());
+        if (filename == null) {
+            return null;
         }
+        Person person = new Person();
+
         person.setId(personDto.getId());
         person.setName(personDto.getName());
         person.setDescription(personDto.getDescription());
+        person.setPicture(filename);
         person.setAdminHint(personDto.getAdminHint());
         person.setPlayable(personDto.isPlayable());
         person.setActions(new HashSet<>(actionRepo.findAllById(personDto.getActions())));

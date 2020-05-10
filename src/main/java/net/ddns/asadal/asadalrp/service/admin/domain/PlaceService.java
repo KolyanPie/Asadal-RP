@@ -6,14 +6,15 @@ import net.ddns.asadal.asadalrp.repo.ActionRepo;
 import net.ddns.asadal.asadalrp.repo.MoodletRepo;
 import net.ddns.asadal.asadalrp.repo.PersonRepo;
 import net.ddns.asadal.asadalrp.repo.PlaceRepo;
+import net.ddns.asadal.asadalrp.util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -93,28 +94,16 @@ public class PlaceService {
     }
 
     private Place createPlace(PlaceDto placeDto) {
-        Place place = new Place();
-        MultipartFile picture = placeDto.getPicture();
-        if (picture != null && !picture.isEmpty()) {
-            String filename = UUID.randomUUID().toString() + "." + picture.getOriginalFilename();
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                if (!uploadDir.mkdir()) {
-                    return null;
-                }
-            }
-            try {
-                picture.transferTo(new File(uploadPath + "/" + filename));
-            } catch (IOException e) {
-                return null;
-            }
-            place.setPicture(filename);
+        String filename = FileUtil.saveFile(placeDto.getPicture());
+        if (filename == null) {
+            return null;
         }
+        Place place = new Place();
 
         place.setId(placeDto.getId());
         place.setName(placeDto.getName());
         place.setDescription(placeDto.getDescription());
+        place.setPicture(filename);
         place.setAdminHint(placeDto.getAdminHint());
         place.setMoodlets(new HashSet<>(moodletRepo.findAllById(placeDto.getMoodlets())));
         place.setActions(new HashSet<>(actionRepo.findAllById(placeDto.getActions())));
