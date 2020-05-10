@@ -20,8 +20,6 @@
             <a href="/admin">
                 <button style="width:90px;height:20px">Модерация</button>
             </a>
-            <button id="create-button" style="width:105px;height:20px">Создание</button>
-            <button id="change-button" style="width:105px;height:20px">Изменения</button>
         </td>
     </tr>
     <tr>
@@ -70,9 +68,12 @@
             </table>
         </td>
         <td>
-        <td rowspan="2" class="change" style="display: none">
-            <div><input type="button" value="Удалить" id="delete-button"></div>
-            <label class="scrollable change" style="display: none">
+        <td rowspan="2" class="change">
+            <div>
+                <input type="button" value="Удалить" id="delete-button" style="width: 98px">
+                <button id="create-button" style="width:98px">Создание</button>
+            </div>
+            <label class="scrollable">
                 <select id="select-domain" size="30" style="width:200px"></select>
             </label>
         </td>
@@ -84,12 +85,14 @@
                 </div>
                 <div class="domain-input action character moodlet person place item">
                     <p>Название:</p>
-                    <label><input type="text" maxlength="30" name="name" placeholder="Название" style="width:280px"></label>
+                    <label><input type="text" maxlength="30" name="name" placeholder="Название"
+                                  style="width:280px"></label>
                 </div>
                 <div class="domain-input character moodlet person place item">
                     <p> Описание:</p>
                     <label>
-                        <textarea name="description" maxlength="255" class="scrollable" style="width:280px;height:90px"></textarea>
+                        <textarea name="description" maxlength="255" class="scrollable"
+                                  style="width:280px;height:90px"></textarea>
                     </label>
                     <br>
                 </div>
@@ -97,7 +100,8 @@
                 <div class="domain-input action character item person place">
                     <p> Подсказка:</p>
                     <label>
-                        <textarea name="adminHint" maxlength="255" class="scrollable" style="width:280px;height:50px"></textarea>
+                        <textarea name="adminHint" maxlength="255" class="scrollable"
+                                  style="width:280px;height:50px"></textarea>
                     </label>
                     <br>
                 </div>

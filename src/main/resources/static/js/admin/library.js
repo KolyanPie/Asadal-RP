@@ -29,7 +29,6 @@ function ajaxToSelectSet(domain) {
             let $selectSet = $('#' + domain + 's');
 
             $selectSet.empty();
-            console.log(data.results);
             $selectSet.select2({
                 data: data.results
             });
@@ -45,6 +44,7 @@ function clearData() {
 
     $form.find('input[type="hidden"], input[type="text"], textarea, input[type="file"]').val('');
     $form.find('input[type="number"]').val('0');
+    $form.find('input[type="checkbox"]').removeAttr('checked');
     $form.find('img').attr('src', '#');
     $('.select-set').val(null).trigger("change");
 }
@@ -74,7 +74,11 @@ let fillForm = function (data) {
             } else {
                 $('input[name="playable"]:checked').removeAttr("checked");
             }
-            $('.preview').find('img').attr('src', '/img/' + data.picture);
+            if (data.picture) {
+                $('.preview').find('img').attr('src', '/img/' + data.picture);
+            } else {
+                $('.preview').find('img').attr('src', '#');
+            }
             if (data.moodlets) {
                 $('#moodlets').val(data.moodlets.map(function (data) {
                     return data.id.toString();
@@ -105,14 +109,7 @@ let alertError = function (jqXHR) {
 
 $(document).ready(function () {
     selectDomain();
-    $('#create-button').click(function () {
-        $('.change').css('display', 'none');
-        clearData();
-    });
-    $('#change-button').click(function () {
-        $('.change').css('display', 'unset');
-        clearData();
-    });
+    $('#create-button').click(clearData);
     $('#delete-button').click(function () {
         $.ajax({
             type: 'DELETE',
