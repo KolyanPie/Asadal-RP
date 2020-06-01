@@ -9,9 +9,9 @@ import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class Place extends AbstractLibraryDomain {
+public class Place extends AbstractPicturedLibraryDomain {
+
     private String description;
-    private String picture;
 
     @ManyToMany
     @JoinTable(
@@ -27,14 +27,6 @@ public class Place extends AbstractLibraryDomain {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
     public Set<Moodlet> getMoodlets() {

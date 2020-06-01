@@ -9,8 +9,7 @@ import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class Item extends AbstractLibraryDomain {
-    private String description;
+public class Item extends AbstractPicturedLibraryDomain {
 
     @ManyToMany
     @JoinTable(
@@ -19,14 +18,6 @@ public class Item extends AbstractLibraryDomain {
             inverseJoinColumns = {@JoinColumn(name = "moodlet_id")}
     )
     private Set<Moodlet> moodlets;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Set<Moodlet> getMoodlets() {
         return moodlets;

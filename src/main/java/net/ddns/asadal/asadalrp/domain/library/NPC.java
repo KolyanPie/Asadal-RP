@@ -3,9 +3,9 @@ package net.ddns.asadal.asadalrp.domain.library;
 import javax.persistence.Entity;
 
 @Entity
-public class NPC extends AbstractLibraryDomain {
+public class NPC extends AbstractPicturedLibraryDomain {
+
     private String description;
-    private String picture;
 
     public String getDescription() {
         return description;
@@ -13,13 +13,5 @@ public class NPC extends AbstractLibraryDomain {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 }
