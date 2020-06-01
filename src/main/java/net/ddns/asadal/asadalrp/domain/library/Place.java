@@ -2,15 +2,14 @@ package net.ddns.asadal.asadalrp.domain.library;
 
 import net.ddns.asadal.asadalrp.domain.Moodlet;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class Place {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String name;
+public class Place extends AbstractLibraryDomain {
     private String description;
     private String picture;
 
@@ -21,22 +20,6 @@ public class Place {
             inverseJoinColumns = {@JoinColumn(name = "moodlet_id")}
     )
     private Set<Moodlet> moodlets;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDescription() {
         return description;
