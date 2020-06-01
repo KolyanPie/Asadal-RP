@@ -1,8 +1,9 @@
-package net.ddns.asadal.asadalrp.domain;
+package net.ddns.asadal.asadalrp.domain.library;
 
 public enum CharacterType {
     POSITIVE,
     NEGATIVE,
     PROFESSION,
-    RACE
+    RACE,
+    OTHER
 }
