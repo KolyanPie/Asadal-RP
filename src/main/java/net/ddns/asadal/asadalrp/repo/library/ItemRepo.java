@@ -1,0 +1,12 @@
+package net.ddns.asadal.asadalrp.repo.library;
+
+import net.ddns.asadal.asadalrp.domain.library.Item;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ItemRepo extends JpaRepository<Item, Long> {
+    Item findByName(String name);
+
+    List<Item> findAllByNameIgnoreCaseContains(String name);
+}
