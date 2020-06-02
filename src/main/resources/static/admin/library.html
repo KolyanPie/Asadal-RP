@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Библиотека</title>
+    <title>Библиотеки</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
@@ -11,175 +11,167 @@
     <script src="/js/form.js"></script>
     <script src="/js/admin/library.js"></script>
     <script src="/js/preview.js"></script>
-    <link href="/css/Moder.css" type="text/css" rel="stylesheet">
+    <link href="/css/admin.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<table class="grand">
-    <tr>
-        <td colspan="3">
+<div class="Vse">
+
+    <div class="shap">
+        <div class="str-admin">
             <a href="/admin">
-                <button style="width:90px;height:20px">Модерация</button>
+                <button disabled>Обзор</button>
             </a>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <table onchange="selectDomain()">
-                <tr>
-                    <td>
-                        <label>
-                            <input type="radio" name="domain" style="width:25px;height:20px" value="action" checked>
-                            Действие
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" name="domain" style="width:25px;height:20px" value="item">
-                            Предмет⁣⁣⁣
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" name="domain" style="width:25px;height:20px" value="moodlet">
-                            Мудлет
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <input type="radio" name="domain" style="width:25px;height:20px" value="person">
-                            Персонаж
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" name="domain" style="width:25px;height:20px" value="place">
-                            Место
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" name="domain" style="width:25px;height:20px" value="character">
-                            Характер
-                        </label>
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td>
-        <td rowspan="2" class="change">
+        </div>
+        <div class="str-heroes">
+        </div>
+        <div class="str-libr">
+            <button disabled>Библиотека</button>
+        </div>
+    </div>
+    <div class="bibl-table">
+        <div class="bible-shap" onchange="selectDomain()">
             <div>
-                <input type="button" value="Удалить" id="delete-button" style="width: 98px">
-                <button id="create-button" style="width:98px">Создание</button>
+                <label>
+                    <input type="radio" name="domain" value="knowledge" checked>
+                    <br>Заметка
+                </label>
             </div>
-            <label class="scrollable">
-                <select id="select-domain" size="30" style="width:200px"></select>
+            <div>
+                <label>
+                    <input type="radio" name="domain" value="item">
+                    <br>Предмет⁣⁣⁣
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="domain" value="moodlet">
+                    <br>Мудлет
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="domain" value="npc">
+                    <br>NPC
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="domain" value="place">
+                    <br>Место
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="domain" value="character">
+                    <br>Характер
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="sozd-delet">
+        <div>
+            <button id="create-button" class="change">Создание</button>
+        </div>
+        <div>
+            <input type="button" value="Удалить" id="delete-button" class="change">
+        </div>
+    </div>
+    <label class="scrollable">
+        <select id="select-domain" size="5"></select>
+    </label>
+    <label class="domain-input npc">
+        <div class="li-podz">ОБЯЗАТЕЛЬНО: <br>+ Название<br>+ Изображение (150x250) <br>+ Описание</div>
+        <br>
+    </label>
+    <label class="domain-input knowledge">
+        <div class="li-podz">ОБЯЗАТЕЛЬНО: <br>+ Название<br>+ Изображение (400x250)<br>+ Описание</div>
+        <br>
+    </label>
+    <label class="domain-input place">
+        <div class="li-podz">ОБЯЗАТЕЛЬНО: <br>+ Название<br>+ Изображение (150x250)<br>+ Описание <br>
+            ДОПОЛНИТЕЛЬНО:<br>+ Мудлеты
+        </div>
+        <br>
+    </label>
+    <label class="domain-input moodlet">
+        <div class="li-podz">ОБЯЗАТЕЛЬНО: <br>+ Название<br>+ Сосредоточенность</div>
+        <br>
+    </label>
+    <label class="domain-input item">
+        <div class="li-podz">ОБЯЗАТЕЛЬНО: <br>+ Название<br>+ Изображение (102x102)<br> ДОПОЛНИТЕЛЬНО:<br>- Мудлеты
+        </div>
+        <br>
+    </label>
+    <label class="domain-input character">
+        <div class="li-podz">ОБЯЗАТЕЛЬНО: <br>+ Тип <br>+ Название<br>ДОПОЛНИТЕЛЬНО: <br> + Описание<br> + Мудлеты</div>
+        <br>
+    </label>
+    <form enctype="multipart/form-data" method="post" id="form">
+        <div class="bibl-cont">
+            <div class="domain-input character li-type-char">
+                <br>Тип:
+                <label>
+                    <input type="radio" value="POSITIVE" name="type">
+                    <b> Плюс</b>
+                </label>
+                <label>
+                    <input type="radio" value="NEGATIVE" name="type">
+                    <b> Минус</b>
+                </label>
+                <label>
+                    <input type="radio" value="PROFESSION" name="type">
+                    <b> Класс</b>
+                </label>
+                <label>
+                    <input type="radio" value="RACE" name="type">
+                    <b> Раса</b>
+                </label>
+                <label>
+                    <input type="radio" value="OTHER" name="type" checked>
+                    <b> Другое</b>
+                </label><br>
+            </div>
+            <div>
+                <br>Название:<br>
+                <label><input type="text" maxlength="25" name="name" placeholder="Название" class="li-naz"></label>
+                <input type="hidden" name="id">
+            </div>
+            <label for="picture" class="domain-input preview knowledge item npc place"><br> Изображение:<br>
+                <input type="file" name="picture" id="picture"><br>
+                <img src="#" alt="preview" class="domain-input knowledge img-know">
+                <img src="#" alt="preview" class="domain-input item img-item">
+                <img src="#" alt="preview" class="domain-input npc place img-pers-loca">
             </label>
-        </td>
-    <tr>
-        <td>
-            <form enctype="multipart/form-data" method="post" id="form">
-                <div>
-                    <input type="hidden" name="id">
-                </div>
-                <div class="domain-input action character moodlet person place item">
-                    <p>Название:</p>
-                    <label><input type="text" maxlength="30" name="name" placeholder="Название"
-                                  style="width:280px"></label>
-                </div>
-                <div class="domain-input character moodlet person place item">
-                    <p> Описание:</p>
-                    <label>
-                        <textarea name="description" maxlength="255" class="scrollable"
-                                  style="width:280px;height:90px"></textarea>
-                    </label>
-                    <br>
-                </div>
-
-                <div class="domain-input action character item person place">
-                    <p> Подсказка:</p>
-                    <label>
-                        <textarea name="adminHint" maxlength="255" class="scrollable"
-                                  style="width:280px;height:50px"></textarea>
-                    </label>
-                    <br>
-                </div>
-                <div class="domain-input character">
-                    <p> Тип:</p>
-                    <table>
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="radio" value="POSITIVE" name="characterType" checked>
-                                    Положительная черта
-                                </label><br>
-                                <label>
-                                    <input type="radio" value="NEGATIVE" name="characterType">
-                                    Отрицательная черта
-                                </label>
-                            </td>
-                            <td>
-                                <label>
-                                    <input type="radio" value="PROFESSION" name="characterType">
-                                    Профессия
-                                </label><br>
-                                <label>
-                                    <input type="radio" value="RACE" name="characterType">
-                                    Раса
-                                </label>
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-                </div>
-                <div class="domain-input moodlet">
-                    <p>Длительность:</p>
-                    <label> <input type="number" name="durability" placeholder="Длительность"></label>
-                    <br>
-                    <p>Сосредоточенность:</p>
-                    <label> <input type="number" name="value" placeholder="Сосредоточенность"></label>
-                    <br>
-                </div>
-                <div class="domain-input person">
-                    <br>
-                    <em> Игровой </em>
-                    <label> <input type="checkbox" name="playable"></label>
-                    <br>
-                </div>
-
-                <div class="domain-input item person place">
-                    <label for="picture" class="preview"> Изображение:<br>
-                        <input type="file" name="picture" id="picture"><br>
-                        <img src="#" alt="preview" class="domain-input item"
-                             style="width: 98px;height: 100px;object-fit:cover">
-                        <img src="#" alt="preview" class="domain-input person place"
-                             style="width: 150px;height: 250px;object-fit:cover">
-                    </label>
-                    <br>
-                </div>
-                <div><input id="save" type="button" value="Создать"></div>
-            </form>
-        </td>
-        <td>
+            <div class="domain-input character npc place knowledge">
+                <br>Описание:<br>
+                <label>
+                    <textarea name="description" maxlength="512" class="scrollable li-opis"></textarea>
+                </label>
+            </div>
+            <div class="domain-input moodlet">
+                <br>Сосредоточенность:<br>
+                <label> <input type="number" name="value" placeholder="Сосредоточенность"></label>
+            </div>
             <label class="domain-input character item place">
-                Мудлеты
-                <select id="moodlets" multiple="multiple" class="select-set" style="width:280px"></select>
+                <br>Мудлеты<br>
+                <select id="moodlets" multiple="multiple" class="select-set li-moodl"></select>
             </label>
-            <label class="domain-input place">
-                Персонажи
-                <select id="persons" multiple="multiple" class="select-set" style="width:280px"></select>
-            </label>
-            <label class="domain-input item place person">
-                Действия
-                <select id="actions" multiple="multiple" class="select-set" style="width:280px"></select>
-            </label>
-            <label class="domain-input person">
-                Характеры
-                <select id="characters" multiple="multiple" class="select-set" style="width:280px"></select>
-            </label>
-        </td>
-    </tr>
-</table>
+            <div><input id="save" type="button" value="Создать" class="li-creat"></div>
+        </div>
+    </form>
+</div>
 </body>
-</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 

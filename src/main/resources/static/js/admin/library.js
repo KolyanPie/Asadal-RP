@@ -1,24 +1,17 @@
-let domain;
+let domain = "";
 let isNew = true;
+
+function selectUrl() {
+    return '/admin/' + domain + '/list';
+}
 
 function selectDomain() {
     clearData();
     domain = $('input[type="radio"][name="domain"]:checked').val();
     $('textarea[name="description"]').attr('maxlength', domain === 'place' ? 1024 : 255);
-    $('#select-domain').select2({
-        ajax: {
-            url: '/admin/' + domain + '/list',
-            type: 'GET'
-        }
-    }).on('select2:select', function (event) {
-        fillForm(event.params.data);
-    });
     $('.domain-input').css('display', 'none');
     $('.' + domain).css('display', 'unset');
     ajaxToSelectSet('moodlet');
-    ajaxToSelectSet('action');
-    ajaxToSelectSet('person');
-    ajaxToSelectSet('character');
 }
 
 function ajaxToSelectSet(domain) {
@@ -46,6 +39,7 @@ function clearData() {
     $form.find('input[type="number"]').val('0');
     $form.find('input[type="checkbox"]').removeAttr('checked');
     $form.find('img').attr('src', '#');
+    $form.find('input[name="type"][value="OTHER"]').attr("checked", "checked");
     $('.select-set').val(null).trigger("change");
 }
 
@@ -64,8 +58,8 @@ let fillForm = function (data) {
             $('input[name="id"]').val(data.id);
             $('input[name="name"]').val(data.name);
             $('textarea[name="adminHint"]').val(data.adminHint);
-            $('input[name="characterType"]:checked').removeAttr("checked");
-            $('input[name="characterType"][value="' + data.characterType + '"]').attr("checked", "checked");
+            $('input[name="type"]:checked').removeAttr("checked");
+            $('input[name="type"][value="' + data.type + '"]').attr("checked", "checked");
             $('textarea[name="description"]').val(data.description);
             $('input[name="durability"]').val(data.durability);
             $('input[name="value"]').val(data.value);
@@ -74,28 +68,13 @@ let fillForm = function (data) {
             } else {
                 $('input[name="playable"]:checked').removeAttr("checked");
             }
-            if (data.picture) {
-                $('.preview').find('img').attr('src', '/img/' + data.picture);
+            if (data.picturePath) {
+                $('.preview').find('img').attr('src', '/img/' + data.picturePath);
             } else {
                 $('.preview').find('img').attr('src', '#');
             }
             if (data.moodlets) {
                 $('#moodlets').val(data.moodlets.map(function (data) {
-                    return data.id.toString();
-                })).trigger("change");
-            }
-            if (data.actions) {
-                $('#actions').val(data.actions.map(function (data) {
-                    return data.id.toString();
-                })).trigger("change");
-            }
-            if (data.persons) {
-                $('#persons').val(data.persons.map(function (data) {
-                    return data.id.toString();
-                })).trigger("change");
-            }
-            if (data.characters) {
-                $('#characters').val(data.characters.map(function (data) {
                     return data.id.toString();
                 })).trigger("change");
             }
@@ -125,14 +104,19 @@ $(document).ready(function () {
     $('#save').click(function () {
         let formData = new FormData($('#form')[0]);
         formData.append("moodlets", $('#moodlets').val());
-        formData.append("actions", $('#actions').val());
-        formData.append("persons", $('#persons').val());
-        formData.append("characters", $('#characters').val());
         sendForm(
             formData,
             '/admin/' + domain + (isNew ? '/save' : '/update?id=' + $('input[name="id"]').val()),
             clearData,
             alertError
         );
+    });
+    $('#select-domain').select2({
+        ajax: {
+            url: selectUrl,
+            type: 'GET'
+        }
+    }).on('select2:select', function (event) {
+        fillForm(event.params.data);
     });
 })
