@@ -1,7 +1,5 @@
 package net.ddns.asadal.asadalrp.domain.library;
 
-import net.ddns.asadal.asadalrp.domain.Moodlet;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
