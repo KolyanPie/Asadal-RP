@@ -1,6 +1,6 @@
 package net.ddns.asadal.asadalrp.controller.admin.library;
 
-import net.ddns.asadal.asadalrp.domain.library.AbstractLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractDomain;
 import net.ddns.asadal.asadalrp.service.library.CommonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractLibraryController<T extends AbstractLibraryDomain, S extends CommonService<T>>
+public abstract class AbstractLibraryController<T extends AbstractDomain, S extends CommonService<T>>
         implements CommonController<T> {
 
     protected final S service;

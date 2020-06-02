@@ -1,6 +1,6 @@
 package net.ddns.asadal.asadalrp.controller.admin.library;
 
-import net.ddns.asadal.asadalrp.domain.library.AbstractLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractDomain;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Map;
 
-public interface CommonController<T extends AbstractLibraryDomain> {
+public interface CommonController<T extends AbstractDomain> {
 
     @GetMapping("/get")
     ResponseEntity<T> get(@RequestParam Long id);

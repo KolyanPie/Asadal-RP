@@ -1,11 +1,11 @@
 package net.ddns.asadal.asadalrp.service.library;
 
-import net.ddns.asadal.asadalrp.domain.library.AbstractLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractDomain;
 
 import java.util.List;
 import java.util.Map;
 
-public interface CommonService<T extends AbstractLibraryDomain> {
+public interface CommonService<T extends AbstractDomain> {
 
     T get(Long id);
 

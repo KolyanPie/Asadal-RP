@@ -1,6 +1,6 @@
 package net.ddns.asadal.asadalrp.service.library;
 
-import net.ddns.asadal.asadalrp.domain.library.AbstractLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractDomain;
 import net.ddns.asadal.asadalrp.repo.library.AbstractLibraryRepo;
 
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public abstract class AbstractLibraryService<T extends AbstractLibraryDomain, R extends AbstractLibraryRepo<T>>
+public abstract class AbstractLibraryService<T extends AbstractDomain, R extends AbstractLibraryRepo<T>>
         implements CommonService<T> {
 
     protected final R repo;

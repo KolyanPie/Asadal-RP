@@ -1,6 +1,6 @@
 package net.ddns.asadal.asadalrp.service.library.pictured;
 
-import net.ddns.asadal.asadalrp.domain.library.AbstractPicturedLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractPicturedDomain;
 import net.ddns.asadal.asadalrp.repo.library.AbstractLibraryRepo;
 import net.ddns.asadal.asadalrp.service.library.AbstractLibraryService;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public abstract class AbstractPicturedLibraryService<T extends AbstractPicturedLibraryDomain, R extends AbstractLibraryRepo<T>>
+public abstract class AbstractPicturedLibraryService<T extends AbstractPicturedDomain, R extends AbstractLibraryRepo<T>>
         extends AbstractLibraryService<T, R> implements CommonPicturedLibraryService<T> {
 
     @Value("${error.name.unavailable}")

@@ -1,11 +1,11 @@
 package net.ddns.asadal.asadalrp.controller.admin.library;
 
-import net.ddns.asadal.asadalrp.domain.library.AbstractLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractDomain;
 import net.ddns.asadal.asadalrp.service.library.CommonUnPicturedService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public abstract class AbstractUnPicturedLibraryController<T extends AbstractLibraryDomain, S extends CommonUnPicturedService<T>>
+public abstract class AbstractUnPicturedLibraryController<T extends AbstractDomain, S extends CommonUnPicturedService<T>>
         extends AbstractLibraryController<T, S> implements CommonUnPicturedController<T> {
 
     public AbstractUnPicturedLibraryController(S service) {

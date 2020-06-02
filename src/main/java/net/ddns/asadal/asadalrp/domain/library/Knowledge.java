@@ -1,9 +1,11 @@
 package net.ddns.asadal.asadalrp.domain.library;
 
+import net.ddns.asadal.asadalrp.domain.AbstractPicturedDomain;
+
 import javax.persistence.Entity;
 
 @Entity
-public class Knowledge extends AbstractPicturedLibraryDomain {
+public class Knowledge extends AbstractPicturedDomain {
 
     private String description;
 

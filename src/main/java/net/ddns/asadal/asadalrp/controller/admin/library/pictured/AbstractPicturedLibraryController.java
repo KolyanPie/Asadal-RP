@@ -1,7 +1,7 @@
 package net.ddns.asadal.asadalrp.controller.admin.library.pictured;
 
 import net.ddns.asadal.asadalrp.controller.admin.library.AbstractLibraryController;
-import net.ddns.asadal.asadalrp.domain.library.AbstractPicturedLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractPicturedDomain;
 import net.ddns.asadal.asadalrp.service.library.pictured.CommonPicturedLibraryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public abstract class AbstractPicturedLibraryController<T extends AbstractPicturedLibraryDomain, S extends CommonPicturedLibraryService<T>>
+public abstract class AbstractPicturedLibraryController<T extends AbstractPicturedDomain, S extends CommonPicturedLibraryService<T>>
         extends AbstractLibraryController<T, S> implements CommonPicturedLibraryController<T> {
 
     public AbstractPicturedLibraryController(S service) {

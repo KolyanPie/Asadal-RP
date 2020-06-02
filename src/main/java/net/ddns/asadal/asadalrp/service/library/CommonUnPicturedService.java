@@ -1,8 +1,8 @@
 package net.ddns.asadal.asadalrp.service.library;
 
-import net.ddns.asadal.asadalrp.domain.library.AbstractLibraryDomain;
+import net.ddns.asadal.asadalrp.domain.AbstractDomain;
 
-public interface CommonUnPicturedService<T extends AbstractLibraryDomain> extends CommonService<T> {
+public interface CommonUnPicturedService<T extends AbstractDomain> extends CommonService<T> {
 
     String save(T libraryDomain);
 

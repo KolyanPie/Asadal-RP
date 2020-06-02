@@ -1,5 +1,7 @@
 package net.ddns.asadal.asadalrp.domain.library;
 
+import net.ddns.asadal.asadalrp.domain.AbstractPicturedDomain;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -7,7 +9,7 @@ import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class Place extends AbstractPicturedLibraryDomain {
+public class Place extends AbstractPicturedDomain {
 
     private String description;
 
