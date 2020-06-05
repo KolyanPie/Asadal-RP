@@ -86,7 +86,7 @@ let alertError = function (jqXHR) {
     alert("Error code: " + jqXHR.status + "\n" + jqXHR.responseText);
 }
 
-$(document).on('ready', function () {
+$(function () {
     selectDomain();
     $('#create-button').on('click', clearData);
     $('#delete-button').on('click', function () {
