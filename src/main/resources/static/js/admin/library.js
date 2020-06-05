@@ -86,13 +86,13 @@ let alertError = function (jqXHR) {
     alert("Error code: " + jqXHR.status + "\n" + jqXHR.responseText);
 }
 
-$(document).ready(function () {
+$(document).on('ready', function () {
     selectDomain();
-    $('#create-button').click(clearData);
-    $('#delete-button').click(function () {
+    $('#create-button').on('click', clearData);
+    $('#delete-button').on('click', function () {
         $.ajax({
             type: 'DELETE',
-            url: '/admin/' + domain + '/remove?' + 'id=' + $('#select-domain').val(),
+            url: '/admin/' + domain + '/remove?' + 'id=' + $('input[name="id"]').val(),
             processData: false,
             contentType: false,
             cache: false,
@@ -101,7 +101,7 @@ $(document).ready(function () {
             success: clearData
         });
     });
-    $('#save').click(function () {
+    $('#save').on('click', function () {
         let formData = new FormData($('#form')[0]);
         formData.append("moodlets", $('#moodlets').val());
         sendForm(
