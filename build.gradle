@@ -1,10 +1,11 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyVersion}"
+    id 'org.liquibase.gradle' version "${liquibasePluginVersion}"
 }
 
-group = 'net.ddns.asadal'
+group = 'ru.kolyanpie.asadal'
 version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -20,8 +21,30 @@ dependencies {
     //database support
     implementation 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    liquibaseRuntime 'org.liquibase:liquibase-core'
+    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl'
 }
 
 test {
     useJUnitPlatform()
+}
+
+ext {
+    database = new Properties().with {
+        load(file("db.properties").newReader()) //название файла с данными для бд
+        it
+    }
+}
+
+liquibase {
+    activities {
+        main {
+            changeLogFile "db/liquibase-changelog.json"
+            //используем переменные, а не сами значения
+            url database.getProperty("dbUrl")
+            username database.getProperty("dbUsername")
+            password database.getProperty("dbPassword")
+        }
+        runList = "main"
+    }
 }
